@@ -43,8 +43,8 @@ public:
 };
 
 int main() {
-    BankAccount account1("John Doe", 123456, 1000.0);
-    BankAccount account2("Jane Smith", 654321, 500.0);
+    BankAccount account1("Urval", 123456, 1000.0);
+    BankAccount account2("Heet", 654321, 500.0);
 
     cout << "--- Account 1 Operations ---" << endl;
     account1.display_balance();
