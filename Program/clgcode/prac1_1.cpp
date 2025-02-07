@@ -1,16 +1,20 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 class BankAccount {
 private:
-    string accountHolderName;
+    char accountHolderName[50]; // Using character array instead of string
     int accountNumber;
     double balance;
 
 public:
-    BankAccount(string name, int accNumber, double initialBalance) {
-        accountHolderName = name;
+    BankAccount(const char name[], int accNumber, double initialBalance) {
+        int i = 0;
+        while (name[i] != '\0' && i < 49) {  // Copy name manually (basic string copy)
+            accountHolderName[i] = name[i];
+            i++;
+        }
+        accountHolderName[i] = '\0'; // Null terminator for safety
         accountNumber = accNumber;
         balance = initialBalance;
     }
