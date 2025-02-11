@@ -1,57 +1,49 @@
 #include <iostream>
-
 using namespace std;
-
-const int MAX_PRODUCTS = 100;
-int productCount = 0;
-
-struct Product {
-    int productId;
-    string name;
-    int quantity;
-    double price;
+class Rectangle {
+private:
+    int length, width;
+public:
+    void setDimensions(int l, int w) {
+        length = l;
+        width = w;    
+    }
+    int area() {
+        return length * width;
+    }
+    int perimeter() {
+        return 2 * (length + width);
+    }
+    void displayDetails() {
+        cout<<"  - Area: "<<area()<<" square units"<<endl;
+        cout<<"  - Perimeter: "<<perimeter()<<" units"<< endl;
+    }
 };
-
-Product inventory[MAX_PRODUCTS];
-
-void addProduct(int productId, string name, int quantity, double price) {
-    for (int i = 0; i < productCount; i++) {
-        if (inventory[i].productId == productId) {
-            cout << "Product already exists!" << endl;
-            return;
-        }
-    }
-    if (productCount < MAX_PRODUCTS) {
-        inventory[productCount++] = {productId, name, quantity, price};
-        cout << "Product '" << name << "' added." << endl;
-    } else {
-        cout << "Inventory full!" << endl;
-    }
+void inputRectangle(Rectangle &rect) {
+    int l, w;
+    cout<<"Enter the length and width of the rectangle: ";
+    cin>>l>>w;
+    rect.setDimensions(l, w);
 }
-
-void updateQuantity(int productId, int quantity) {
-    for (int i = 0; i < productCount; i++) {
-        if (inventory[i].productId == productId) {
-            inventory[i].quantity += quantity;
-            cout << "Updated quantity of '" << inventory[i].name << "' to " << inventory[i].quantity << "." << endl;
-            return;
-        }
-    }
-    cout << "Product not found!" << endl;
-}
-
-void calculateTotalValue() {
-    double totalValue = 0;
-    for (int i = 0; i < productCount; i++) {
-        totalValue += inventory[i].quantity * inventory[i].price;
-    }
-    cout << "Total inventory value: ₹" << totalValue << endl;
-}
-
 int main() {
-    addProduct(1, "Laptop", 10, 80000);
-    addProduct(2, "Mouse", 50, 2000);
-    updateQuantity(1, 5);
-    calculateTotalValue();
+    Rectangle rect1, rect2;
+
+    cout<<"Let's create some rectangles!"<<endl;
+    
+    cout<<"For the first rectangle:"<<endl;
+    inputRectangle(rect1);
+    
+    cout<<"For the second rectangle:"<<endl;
+    inputRectangle(rect2);
+
+    cout<<endl<<"Here are the details of your rectangles:"<<endl;
+
+    cout<<"First Rectangle:"<<endl;
+    rect1.displayDetails();
+
+    cout<<endl<<"Second Rectangle:"<<endl;
+    rect2.displayDetails();
+
+    cout<<endl<<"End Of Programme"<<endl;
     return 0;
 }
