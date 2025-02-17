@@ -1,69 +1,53 @@
 #include <iostream>
 using namespace std;
-const int MAX_PRODUCTS = 100;
-class Product {
-public:
-    int productId;
+
+class Student {
+private:
+    int rollNumber;
     string name;
-    int quantity;
-    double price;
-    Product() {}
-    Product(int id, string name, int qty, double price) {
-        this->productId = id;
-        this->name = name;
-        this->quantity = qty;
-        this->price = price;
+    float marks[3];
+    
+public:
+    Student() : rollNumber(0), name("Default Name") {
+        marks[0] = marks[1] = marks[2] = 0.0;
     }
-    void updateQuantity(int qty) {
-        quantity += qty;
+    
+    Student(int roll, string studentName, float m1, float m2, float m3) : rollNumber(roll), name(studentName) {
+        marks[0] = m1;
+        marks[1] = m2;
+        marks[2] = m3;
     }
-    double getValue() {
-        return quantity * price;
+    
+    float calculateAverage() {
+        return (marks[0] + marks[1] + marks[2]) / 3.0;
+    }
+    void getData() {
+        cout<<"Enter Roll Number: ";
+        cin>>rollNumber;
+        cout<<"Enter Name: ";
+        cin.ignore();
+        getline(cin, name);
+        cout<<"Enter Marks for 3 subjects: ";
+        cin>>marks[0]>>marks[1]>>marks[2];
+    }
+    void displayDetails() {
+        cout<<"Roll Number: "<<rollNumber<<endl;
+        cout<<"Name: "<<name<<endl;
+        cout<<"Marks: "<<marks[0]<<", "<<marks[1]<<", "<<marks[2]<<endl;
+        cout<<"Average Marks: "<<calculateAverage()<<endl;
+        cout<<"-----------------------------------"<<endl;
     }
 };
 
-class Inventory {
-private:
-    Product products[MAX_PRODUCTS];
-    int productCount = 0;
-public:
-    void addProduct(int productId, string name, int quantity, double price) {
-        for (int i = 0; i < productCount; i++) {
-            if (products[i].productId == productId) {
-                cout << "Product already exists!" << endl;
-                return;
-            }
-        }
-        if (productCount < MAX_PRODUCTS) {
-            products[productCount++] = Product(productId, name, quantity, price);
-            cout << "Product '" << name << "' added." << endl;
-        } else {
-            cout << "Inventory full!" << endl;
-        }
-    }
-    void updateQuantity(int productId, int quantity) {
-        for (int i = 0; i < productCount; i++) {
-            if (products[i].productId == productId) {
-                products[i].updateQuantity(quantity);
-                cout << "Updated quantity of '" << products[i].name << "' to " << products[i].quantity << "." << endl;
-                return;
-            }
-        }
-        cout << "Product not found!" << endl;
-    }
-    void calculateTotalValue() {
-        double totalValue = 0;
-        for (int i = 0; i < productCount; i++) {
-            totalValue += products[i].getValue();
-        }
-        cout << "Total inventory value: ₹" << totalValue << endl;
-    }
-};
 int main() {
-    Inventory inventory;
-    inventory.addProduct(1, "Laptop", 10, 80000);
-    inventory.addProduct(2, "Mouse", 50, 2000);
-    inventory.updateQuantity(1, 5);
-    inventory.calculateTotalValue();
+    Student students[4];
+
+     for (int i = 0; i < 4; i++) {
+        students[i].getData();
+    }
+    for (int i = 0; i < 4; i++) {
+        students[i].displayDetails();
+    }
+    
     return 0;
 }
