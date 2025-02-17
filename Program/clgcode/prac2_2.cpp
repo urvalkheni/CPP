@@ -22,30 +22,32 @@ public:
         return (marks[0] + marks[1] + marks[2]) / 3.0;
     }
     void getData() {
-        cout<<"Enter Roll Number: ";
+        cout<<"Enter Roll Number :: ";
         cin>>rollNumber;
-        cout<<"Enter Name: ";
+        cout<<"Enter Name :: ";
         cin.ignore();
         getline(cin, name);
-        cout<<"Enter Marks for 3 subjects: ";
+        cout<<"Enter Marks for 3 subjects :: ";
         cin>>marks[0]>>marks[1]>>marks[2];
     }
     void displayDetails() {
-        cout<<"Roll Number: "<<rollNumber<<endl;
-        cout<<"Name: "<<name<<endl;
-        cout<<"Marks: "<<marks[0]<<", "<<marks[1]<<", "<<marks[2]<<endl;
-        cout<<"Average Marks: "<<calculateAverage()<<endl;
+        cout<<"Roll Number :: "<<rollNumber<<endl;
+        cout<<"Name :: "<<name<<endl;
+        cout<<"Marks :: "<<marks[0]<<", "<<marks[1]<<", "<<marks[2]<<endl;
+        cout<<"Average Marks :: "<<calculateAverage()<<endl;
         cout<<"-----------------------------------"<<endl;
     }
 };
 
 int main() {
-    Student students[4];
+    int n;
+    cout<<"Enter How many Student You Want :: ";cin>>n;
+    Student students[n];
 
-     for (int i = 0; i < 4; i++) {
+     for (int i = 0; i < n; i++) {
         students[i].getData();
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < n; i++) {
         students[i].displayDetails();
     }
     
