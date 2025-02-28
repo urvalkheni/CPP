@@ -1,6 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <chrono>
+#include<iostream>
+#include<vector>
+#include<chrono>
 
 using namespace std;
 using namespace std::chrono;
@@ -20,13 +20,13 @@ int iterativeSum(const vector<int>& arr) {
 
 int main() {
     int n;
-    cout << "Enter the size of the array: ";
-    cin >> n;
+    cout<<"Enter the size of the array :: ";
+    cin>>n;
     
     vector<int> arr(n);
-    cout << "Enter " << n << " elements: ";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    cout<<"Enter "<<n<<" elements :: ";
+    for(int i = 0; i < n; i++) {
+        cin>>arr[i];
     }
     
     auto startRecursive = high_resolution_clock::now();
@@ -39,8 +39,8 @@ int main() {
     auto stopIterative = high_resolution_clock::now();
     auto durationIterative = duration_cast<nanoseconds>(stopIterative - startIterative);
     
-    cout << "Recursive Sum: " << recSum << " (Time taken: " << durationRecursive.count() << " ns)" << endl;
-    cout << "Iterative Sum: " << iterSum << " (Time taken: " << durationIterative.count() << " ns)" << endl;
+    cout << "Recursive Sum :: " <<recSum<<"(Time taken: "<<durationRecursive.count()<< " ns)" << endl;
+    cout << "Iterative Sum :: " <<iterSum<<"(Time taken: "<<durationIterative.count()<< " ns)" << endl;
     
     return 0;
 }
