@@ -16,13 +16,11 @@ int main(){
     int n;
     cout<<"Enter number of elements :: ";
     cin>>n;
-
     vector<int> arr(n);
-    cout<<"Enter "<<n<<"elements :: ";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
+    cout<<"Enter "<<n<<" elements :: ";
+    for (int i=0;i<n;i++) {
+        cin>>arr[i];
     }
-
     cout<<"Recursive Sum :: "<<recursiveSum(arr,n)<<endl;
     cout<<"Iterative Sum :: "<<iterativeSum(arr)<<endl;
     return 0;
