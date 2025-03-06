@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// Function to calculate the sum of digits of a number
+
 int sumOfDigits(int num) {
     int sum = 0;
     while (num > 0) {
@@ -13,19 +13,19 @@ int sumOfDigits(int num) {
     return sum;
 }
 
-// Function to check if a number is a perfect square
+
 bool isPerfectSquare(int num) {
     int root = sqrt(num);
     return (root * root == num);
 }
 
-// Function to check if a number is a perfect cube
+
 bool isPerfectCube(int num) {
     int root = cbrt(num);
     return (root * root * root == num);
 }
 
-// Function to check if a number satisfies the given condition
+
 void checkNumbers(int N) {
     cout << "Perfect Squares satisfying the condition:\n";
     bool foundSquare = false;
@@ -58,7 +58,7 @@ void checkNumbers(int N) {
     cout << endl;
 }
 
-// Main function
+
 int main() {
     int N;
     cout << "Enter the range (N): ";
