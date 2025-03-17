@@ -11,12 +11,10 @@ int main() {
         return 0;
     }
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n / 2 + 1; j++) {  
-            if (j == 0 || i == j + n / 4 || i + j == n - n / 4 - 1)
-                cout << "* ";
-            else
-                cout << "  ";
+    for (int i=1; i <=n; i++) {
+        for (int j=1;j<n;j++) {  
+            if(j==1 || (i<3 && i+j==n) || (i>=3 && i==j+1))cout<<"*";
+            else cout<<" ";
         }
         cout << endl;
     }
