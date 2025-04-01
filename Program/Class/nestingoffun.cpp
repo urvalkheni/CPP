@@ -17,53 +17,47 @@ using namespace std;
 // class defination
  } urval,heet,krish; */
   // Nesting of member functions
-  class binary{
+class Binary{
     string s;
-    public:
-     void read(void);
-     void chk_bin(void);
-     void ones(void);
-     void display(void);
-  };
-  void binary :: read(void){
-    cout<<"Enter a Binary Number :: ";
-    cin>>s;
-  }
-  void binary :: chk_bin(void){
-    for (int i = 0; i < s.length(); i++)
-    {
-        if(s.at(i)!='0' && s.at(i)!='1'){
-            cout<<"Incorrect binary format"<<endl;
-            exit(0);
-        }
-    }   
-    cout<<"The Number is Binary"<<endl; 
-  }
-  void binary :: ones(void){
-    for (int i = 0; i < s.length(); i++)
-    {
-        if(s.at(i)=='0'){
-            s.at(i)='1';
-        }
-       else {
-            s.at(i)='0';
-        }
-    }    
-  }
-  void binary :: display (void){
-    for (int i = 0; i < s.length(); i++)
-    {
-        cout<<s.at(i);
+    void chk_bin(void);
+    public :
+    void read(void);
+    void ones(void);
+    void display(void);
+
+};
+void Binary :: read(void){
+     cout<<"Enter a Binary Number :: ";
+     cin>>s;
+}
+void Binary :: chk_bin(void){
+     for(int i=0;i<s.length();i++){
+      if(s.at(i) != '0' && s.at(i) !='1') cout<<"Incorrect Binary Format"<<endl;
+     }
+}
+void Binary :: ones(void){
+  for(int i=0;i<s.length();i++){
+    if(s.at(i) == '0'){
+      s.at(i) = '1';
     }
-    cout<<endl;
-  }
+    else if(s.at(i) == '1'){
+      s.at(i) = '0';
+    } 
+   }
+}
+void Binary :: display(void){
+  cout<<"Displaying Your Binary number :: ";
+  for(int i=0;i<s.length();i++){
+    cout<<s.at(i); 
+}
+cout<<endl;
+}
 int main(){
-    binary b;
-    
+    Binary b;
     b.read();
-    b.chk_bin();
+    // b.chk_bin(); can't use directly
     b.display();
     b.ones();
     b.display();
-    return 0;
+  return 0;
 }
