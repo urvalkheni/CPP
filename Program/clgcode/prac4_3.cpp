@@ -1,14 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
 using namespace std;
-
 struct Transaction {
     string type;
     double amount;
 };
-
 class BankAccount {
 protected:
     int accountNumber;
