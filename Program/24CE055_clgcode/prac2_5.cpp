@@ -1,4 +1,5 @@
 #include <iostream>
+#include<string>
 #include <cmath>
 #include <iomanip>
 
@@ -41,10 +42,10 @@ public:
         cout << "\n----- Loan Summary -----\n";
         cout << "Loan ID: " << loanID << endl;
         cout << "Applicant Name: " << applicantName << endl;
-        cout << "Loan Amount: ₹" << fixed << setprecision(2) << loanAmount << endl;
+        cout << "Loan Amount: rupees " << fixed << setprecision(2) << loanAmount << endl;
         cout << "Annual Interest Rate: " << annualInterestRate << "%" << endl;
         cout << "Tenure: " << tenureMonths << " months" << endl;
-        cout << "Calculated EMI: ₹" << fixed << setprecision(2) << calculateEMI() << endl;
+        cout << "Calculated EMI: rupees " << fixed << setprecision(2) << calculateEMI() << endl;
     }
 };
 
@@ -62,7 +63,7 @@ int main() {
     cin.ignore();
     cout << "Applicant Name: ";
     getline(cin, name);
-    cout << "Loan Amount (₹): ";
+    cout << "Loan Amount (rupees): ";
     cin >> amount;
     cout << "Annual Interest Rate (%): ";
     cin >> rate;
