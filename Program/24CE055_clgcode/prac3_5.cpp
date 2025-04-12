@@ -15,10 +15,14 @@ int superDigit(string n, int k) {
 int main() {
     string n;
     int k;
-    cin >> n >> k;
-    cout << superDigit(n, k) << endl;
 
-    cout<<endl<<"24CE055 <---> URVAL KHENI"<<endl;
+    cout << "Enter number string: ";
+    cin >> n;
+    cout << "Enter repeat count (k): ";
+    cin >> k;
+
+    cout << "Super Digit: " << superDigit(n, k) << endl;
+
+    cout << "\n24CE055 <---> URVAL KHENI" << endl;
     return 0;
-    
 }
