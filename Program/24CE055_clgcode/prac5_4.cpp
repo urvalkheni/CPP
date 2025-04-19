@@ -178,7 +178,6 @@ void temperatureSystem() {
         }
     } while (choice != 0);
 }
-
 // Entry point of the program
 int main() {
     temperatureSystem();
