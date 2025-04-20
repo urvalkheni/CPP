@@ -19,9 +19,9 @@ void distance(Point p,Point q){
     cout<<"The Distance Between two point is :: "<<sqrt((dx*dx) + (dy*dy))<<endl;
 }
 int main(){
-    Point p1(3,4);
+    Point p1(2,2);
     p1.displayPoint();
-    Point p2(-3,-4);
+    Point p2(1,1);
     p2.displayPoint();
     distance(p1,p2);
 
