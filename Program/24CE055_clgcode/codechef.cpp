@@ -6,7 +6,6 @@ using namespace std;
 int main() {
     int T;
     cin >> T;
-    
     while (T--) {
         int N, A, B;
         cin >> N >> A >> B;
@@ -16,7 +15,7 @@ int main() {
         
         cout << total_time << endl;
     }
-    
+    cout<<endl<<"24CE055 <--> Urval Kheni"<<endl;
     return 0;
 }
 // code is still not complated
