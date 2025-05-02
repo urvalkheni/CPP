@@ -10,6 +10,11 @@ int main() {
     cout << "Enter the size of the second sorted array: ";
     cin >> n2;
 
+    if (n1 < 0 || n2 < 0) {
+        cout << "Array sizes must be non-negative." << endl;
+        return 1;
+    }
+
     // Dynamically allocate memory for the arrays
     int* arr1 = new int[n1];
     int* arr2 = new int[n2];
@@ -39,12 +44,12 @@ int main() {
         }
     }
 
-    // Copy remaining elements from arr1, if any
+    // Copy remaining elements from arr1
     while (i < n1) {
         merged[k++] = arr1[i++];
     }
 
-    // Copy remaining elements from arr2, if any
+    // Copy remaining elements from arr2
     while (j < n2) {
         merged[k++] = arr2[j++];
     }
@@ -54,12 +59,15 @@ int main() {
     for (int idx = 0; idx < n1 + n2; ++idx) {
         cout << merged[idx] << " ";
     }
-    cout << endl;
+    cout << "\n";
 
     // Deallocate the dynamic memory
     delete[] arr1;
     delete[] arr2;
     delete[] merged;
+
+    // Footer
+    cout << "\n24CE055 <---> URVAL KHENI\n";
 
     return 0;
 }
