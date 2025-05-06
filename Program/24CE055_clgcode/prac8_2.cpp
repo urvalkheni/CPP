@@ -3,25 +3,26 @@
 #include <map>
 #include <string>
 
-int main() {
-    std::string sentence;
-    std::cout << "Enter a sentence: ";
-    std::getline(std::cin, sentence);
+using namespace std;
 
-    std::map<std::string, int> wordFrequency;
-    std::stringstream ss(sentence);
-    std::string word;
+int main() {
+    string sentence;
+    cout << "Enter a sentence: ";
+    getline(cin, sentence);
+
+    map<string, int> wordFrequency;
+    stringstream ss(sentence);
+    string word;
 
     while (ss >> word) {
         ++wordFrequency[word];
     }
 
-    std::cout << "\nWord Frequency:\n";
+    cout << "\nWord Frequency:\n";
     for (const auto& pair : wordFrequency) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
+        cout << pair.first << ": " << pair.second << endl;
     }
 
-
-    cout<<endl<<"24CE055 <---> URVAL KHENI"<<endl;
+    cout << "\n24CE055 <---> URVAL KHENI" << endl;
     return 0;
 }
