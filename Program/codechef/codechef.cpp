@@ -2,38 +2,56 @@
 #include <cmath>
 using namespace std;
 
+// Function to calculate total event time
+int calculateEventTime(int N, int A, int B) {
+    int rounds = log2(N);  // Since N is a power of 2
+    return (rounds * A) + ((rounds - 1) * B);
+}
+
+// Function to check if a number is a power of 2
+bool isPowerOfTwo(int n) {
+    return (n > 1) && ((n & (n - 1)) == 0);
+}
+
 int main() {
     int T;
-    
-    // Ask user for the number of test cases
-    cout << "Welcome to Binary Battles Event Time Calculator!" << endl;
-    cout << "-----------------------------------------------" << endl;
-    cout << "Enter the number of test cases :: ";
+
+    cout << "===============================================\n";
+    cout << "   Welcome to Binary Battles Event Time Calculator!\n";
+    cout << "===============================================\n";
+    cout << "Enter the number of test cases: ";
     cin >> T;
-    
+
     while (T--) {
         int N, A, B;
-        
-        // Input number of teams, duration of each round, and break duration
-        cout << "\n-----------------------------------------------" << endl;
-        cout << "Enter the following details for the event ::" << endl;
-        cout << "Number of teams (N) :: ";
-        cin >> N;
-        cout << "Duration of each round (A in minutes) :: ";
+
+        cout << "\n-----------------------------------------------\n";
+        cout << "Enter the event details below:\n";
+
+        // Input validation for number of teams
+        do {
+            cout << "Number of teams (power of 2, N > 1): ";
+            cin >> N;
+            if (!isPowerOfTwo(N))
+                cout << "Invalid input! N must be a power of 2 and greater than 1.\n";
+        } while (!isPowerOfTwo(N));
+
+        // Input for round duration and break time
+        cout << "Duration of each round (A in minutes): ";
         cin >> A;
-        cout << "Break time between rounds (B in minutes) :: ";
+
+        cout << "Break time between rounds (B in minutes): ";
         cin >> B;
-        
-        // Calculate the number of rounds and total event time
-        int rounds = log2(N); // since N is a power of 2
-        int total_time = (rounds * A) + ((rounds - 1) * B);
-        
-        // Output the result
-        cout << "\n-----------------------------------------------" << endl;
-        cout << "The total time for the event is :: " << total_time << " minutes." << endl;
+
+        int total_time = calculateEventTime(N, A, B);
+
+        cout << "\n-----------------------------------------------\n";
+        cout << "Total time for the event: " << total_time << " minutes\n";
         cout << "-----------------------------------------------\n";
     }
-    
-    cout << "Thank you for using the Binary Battles Event Time Calculator!" << endl;
+
+    cout << "\nThank you for using the Binary Battles Event Time Calculator!\n";
+    cout << "===============================================\n";
+
     return 0;
 }
