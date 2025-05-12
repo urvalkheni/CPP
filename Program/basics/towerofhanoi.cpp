@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 // Function to solve Tower of Hanoi
 void towerOfHanoi(int n, char source, char auxiliary, char destination) {
     if (n == 1) {
@@ -11,7 +10,6 @@ void towerOfHanoi(int n, char source, char auxiliary, char destination) {
     cout << "Move disk " << n << " from " << source << " to " << destination << endl;
     towerOfHanoi(n - 1, auxiliary, source, destination); // Move n-1 disks to destination
 }
-
 int main() {
     int n;
     cout << "Enter number of disks: ";
