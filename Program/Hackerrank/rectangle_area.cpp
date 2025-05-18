@@ -1,17 +1,23 @@
 #include <iostream>
 using namespace std;
 
-// Base class: Rectangle
+/*
+ * Create class Rectangle
+ */
 class Rectangle {
 protected:
-    int width, height;
+    int width;
+    int height;
+
 public:
     void display() {
         cout << width << " " << height << endl;
     }
 };
 
-// Derived class: RectangleArea
+/*
+ * Create class RectangleArea which inherits from Rectangle
+ */
 class RectangleArea : public Rectangle {
 public:
     void read_input() {
@@ -23,13 +29,27 @@ public:
     }
 };
 
-int main() {
-    // Create object of derived class
+int main()
+{
+    /*
+     * Declare a RectangleArea object
+     */
     RectangleArea r_area;
 
-    r_area.read_input();      // Read width and height
-    r_area.Rectangle::display();  // Display width and height (from base class)
-    r_area.display();         // Display area (overridden in derived class)
+    /*
+     * Read the width and height
+     */
+    r_area.read_input();
+
+    /*
+     * Print the width and height
+     */
+    r_area.Rectangle::display();
+
+    /*
+     * Print the area
+     */
+    r_area.display();
 
     return 0;
 }
