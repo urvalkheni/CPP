@@ -1,33 +1,37 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <thread>    // Required for std::this_thread
-#include <chrono>    // Required for std::chrono
+
+#if defined(_WIN32)
+#include <windows.h>
+#define SLEEP(ms) Sleep(ms)
+#else
+#include <thread>
+#include <chrono>
+#define SLEEP(ms) std::this_thread::sleep_for(std::chrono::milliseconds(ms))
+#endif
+
 using namespace std;
 
 int main() {
-    string input;
     cout << "Enter your string: ";
-    getline(cin, input); // Take full line input
+    string input;
+    getline(cin, input);
 
-    stringstream ss(input);
-    string word;
+    // Split string into words
     vector<string> words;
-
-    // Split input into words
-    while (ss >> word) {
-        words.push_back(word);
+    for (stringstream ss(input); ss >> input; ) {
+        words.push_back(input);
     }
 
     cout << "\nStep-by-step display:\n\n";
-    string current = "";
 
+    string current;
     for (size_t i = 0; i < words.size(); ++i) {
-        if (i > 0) current += " ";
+        if (!current.empty()) current += " ";
         current += words[i];
         cout << current << endl;
-
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        SLEEP(500); // Delay in milliseconds
     }
 
     return 0;
