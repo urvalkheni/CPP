@@ -39,8 +39,7 @@ int main() {
     taskQueue.push(Task<string>("Complete Assignment", 2));
     taskQueue.push(Task<string>("Study DSA", 5));
     taskQueue.push(Task<string>("Water Plants", 1));
-    taskQueue.push(Task<string>("EncryptedTask", 10)); // No leaks here 😅
-
+    taskQueue.push(Task<string>("EncryptedTask", 10));
     // Process tasks by priority
     cout << "Processing tasks by priority:\n";
     while (!taskQueue.empty()) {
