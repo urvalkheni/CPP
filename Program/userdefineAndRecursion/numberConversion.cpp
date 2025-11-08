@@ -1,12 +1,13 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
 using namespace std;
 
-// Recursion Program 3: Decimal to Binary, Octal, and Hexadecimal Conversion
+// Enhanced Number Conversion with Recursion
 
 // Function to convert decimal to binary
 void decimalToBinary(int n) {
     if (n == 0) return;
-    
     decimalToBinary(n / 2);
     cout << n % 2;
 }
@@ -14,7 +15,6 @@ void decimalToBinary(int n) {
 // Function to convert decimal to octal
 void decimalToOctal(int n) {
     if (n == 0) return;
-    
     decimalToOctal(n / 8);
     cout << n % 8;
 }
@@ -22,10 +22,8 @@ void decimalToOctal(int n) {
 // Function to convert decimal to hexadecimal
 void decimalToHexadecimal(int n) {
     if (n == 0) return;
-    
     decimalToHexadecimal(n / 16);
     int remainder = n % 16;
-    
     if (remainder < 10) {
         cout << remainder;
     } else {
@@ -33,11 +31,41 @@ void decimalToHexadecimal(int n) {
     }
 }
 
+// Reverse conversion: Binary to Decimal
+int binaryToDecimal(string binary, int index = 0) {
+    if (index == binary.length()) return 0;
+    int digit = binary[index] - '0';
+    int power = binary.length() - index - 1;
+    return digit * (1 << power) + binaryToDecimal(binary, index + 1);
+}
+
+// Octal to Decimal
+int octalToDecimal(int octal) {
+    if (octal == 0) return 0;
+    return (octal % 10) + 8 * octalToDecimal(octal / 10);
+}
+
+// Hex to Decimal
+int hexToDecimal(string hex, int index = 0) {
+    if (index == hex.length()) return 0;
+    int digit;
+    if (hex[index] >= '0' && hex[index] <= '9') {
+        digit = hex[index] - '0';
+    } else {
+        digit = hex[index] - 'A' + 10;
+    }
+    int power = hex.length() - index - 1;
+    int base = 1;
+    for (int i = 0; i < power; i++) base *= 16;
+    return digit * base + hexToDecimal(hex, index + 1);
+}
+
 // Function to print number in all bases
 void printInAllBases(int n) {
-    cout << "\nDecimal: " << n << endl;
+    cout << "\n--- Number in All Bases ---" << endl;
+    cout << "Decimal: " << n << endl;
     
-    cout << "Binary: ";
+    cout << "Binary:  ";
     if (n == 0) {
         cout << "0";
     } else {
@@ -45,9 +73,22 @@ void printInAllBases(int n) {
     }
     cout << endl;
     
-    cout << "Octal: ";
+    cout << "Octal:   ";
     if (n == 0) {
         cout << "0";
+    } else {
+        decimalToOctal(n);
+    }
+    cout << endl;
+    
+    cout << "Hex:     ";
+    if (n == 0) {
+        cout << "0";
+    } else {
+        decimalToHexadecimal(n);
+    }
+    cout << endl;
+}
     } else {
         decimalToOctal(n);
     }
