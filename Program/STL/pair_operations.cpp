@@ -2,11 +2,13 @@
 #include <utility>
 #include <vector>
 #include <algorithm>
+#include <map>
 using namespace std;
 
-// STL Pair Operations - Complete Guide
+// STL Pair Operations - Enhanced Complete Guide with Advanced Features
 int main() {
-    cout << "=== STL PAIR OPERATIONS ===" << endl;
+    cout << "=== STL PAIR OPERATIONS (ENHANCED) ===" << endl;
+    cout << "Version 2.0 - Now with more features!" << endl;
     
     // 1. Creating pairs
     cout << "\n--- Creating Pairs ---" << endl;
@@ -125,13 +127,83 @@ int main() {
              << findIt->second << endl;
     }
     
-    // 11. Properties
+    // 11. Pair Swapping
+    cout << "\n--- Pair Swapping ---" << endl;
+    pair<int, string> pair1(100, "First");
+    pair<int, string> pair2(200, "Second");
+    cout << "Before swap: pair1(" << pair1.first << ", " << pair1.second << ")" << endl;
+    cout << "Before swap: pair2(" << pair2.first << ", " << pair2.second << ")" << endl;
+    pair1.swap(pair2);
+    cout << "After swap: pair1(" << pair1.first << ", " << pair1.second << ")" << endl;
+    cout << "After swap: pair2(" << pair2.first << ", " << pair2.second << ")" << endl;
+    
+    // 12. Using tie() for unpacking
+    cout << "\n--- Using tie() for Unpacking ---" << endl;
+    pair<string, int> employee = make_pair("John", 5000);
+    string empName;
+    int empSalary;
+    tie(empName, empSalary) = employee;
+    cout << "Unpacked: Name = " << empName << ", Salary = " << empSalary << endl;
+    
+    // Using ignore with tie
+    pair<int, int> coords(10, 20);
+    int xCoord;
+    tie(xCoord, ignore) = coords; // Only extract first element
+    cout << "Extracted only x coordinate: " << xCoord << endl;
+    
+    // 13. Pair with Map (Real-world usage)
+    cout << "\n--- Pair with Map (Frequency Counter) ---" << endl;
+    vector<string> words = {"apple", "banana", "apple", "cherry", "banana", "apple"};
+    map<string, int> frequency;
+    
+    for(const auto& word : words) {
+        frequency[word]++;
+    }
+    
+    cout << "Word frequencies:" << endl;
+    for(const auto& p : frequency) {
+        cout << p.first << ": " << p.second << " times" << endl;
+    }
+    
+    // 14. Multiple Pair Comparisons
+    cout << "\n--- Advanced Pair Comparisons ---" << endl;
+    vector<pair<int, int>> points = {{3, 5}, {1, 2}, {3, 1}, {1, 5}};
+    
+    cout << "Original points: ";
+    for(const auto& pt : points) {
+        cout << "(" << pt.first << "," << pt.second << ") ";
+    }
+    cout << endl;
+    
+    // Sort by first, then by second
+    sort(points.begin(), points.end());
+    cout << "Sorted points: ";
+    for(const auto& pt : points) {
+        cout << "(" << pt.first << "," << pt.second << ") ";
+    }
+    cout << endl;
+    
+    // Custom comparison - sort by sum of coordinates
+    sort(points.begin(), points.end(), 
+         [](const pair<int,int>& a, const pair<int,int>& b) {
+             return (a.first + a.second) < (b.first + b.second);
+         });
+    cout << "Sorted by sum: ";
+    for(const auto& pt : points) {
+        cout << "(" << pt.first << "," << pt.second << ") ";
+    }
+    cout << endl;
+    
+    // 15. Properties
     cout << "\n--- Pair Properties ---" << endl;
     cout << "1. Stores two heterogeneous objects" << endl;
     cout << "2. Comparison: first element has priority" << endl;
     cout << "3. Useful for returning multiple values" << endl;
     cout << "4. Commonly used with maps and sets" << endl;
     cout << "5. O(1) access to both elements" << endl;
+    cout << "6. Can be swapped efficiently" << endl;
+    cout << "7. Supports tie() for unpacking" << endl;
+    cout << "8. Perfect for coordinate systems and key-value pairs" << endl;
     
     return 0;
 }

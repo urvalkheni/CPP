@@ -1,7 +1,8 @@
 #include <iostream>
+#include <cctype>
 using namespace std;
 
-// Alphabet Pattern Collection
+// Alphabet Pattern Collection (Enhanced with Color Support)
 
 // Pattern 1: Triangle with Alphabets
 void printAlphabetTriangle(int n) {

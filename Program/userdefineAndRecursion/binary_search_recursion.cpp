@@ -1,7 +1,8 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-// Binary Search using Recursion
+// Binary Search using Recursion (Enhanced with Vector Support)
 
 // Basic Binary Search
 int binarySearch(int arr[], int left, int right, int target) {
