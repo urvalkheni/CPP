@@ -1,11 +1,12 @@
 #include <iostream>
 #include <list>
 #include <algorithm>
+#include <iterator>
 using namespace std;
 
-// List Advanced Operations
+// List Advanced Operations (Enhanced Version)
 int main() {
-    cout << "=== LIST ADVANCED OPERATIONS ===" << endl;
+    cout << "=== LIST ADVANCED OPERATIONS (Enhanced Version) ===" << endl;
     
     // 1. Creating lists
     cout << "\n--- Creating Lists ---" << endl;
