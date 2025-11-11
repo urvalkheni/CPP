@@ -1,10 +1,12 @@
 #include <iostream>
 #include <set>
+#include <unordered_set>
+#include <algorithm>
 using namespace std;
 
-// Set Advanced Operations
+// Set Advanced Operations with Additional Features
 int main() {
-    cout << "=== SET ADVANCED OPERATIONS ===" << endl;
+    cout << "=== SET ADVANCED OPERATIONS (Enhanced Version) ===" << endl;
     
     // 1. Creating sets
     cout << "\n--- Creating Sets ---" << endl;
