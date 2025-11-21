@@ -3,7 +3,24 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <queue>
+#include <tuple>
+#include <cmath>
 using namespace std;
+
+// Utility: return min and max from a list
+pair<int, int> getMinMaxPair(const vector<int>& values) {
+    if (values.empty()) {
+        return {0, 0};
+    }
+    int currentMin = values.front();
+    int currentMax = values.front();
+    for (int value : values) {
+        currentMin = min(currentMin, value);
+        currentMax = max(currentMax, value);
+    }
+    return {currentMin, currentMax};
+}
 
 // STL Pair Operations - Enhanced Complete Guide with Advanced Features
 int main() {
@@ -167,34 +184,58 @@ int main() {
     
     // 14. Multiple Pair Comparisons
     cout << "\n--- Advanced Pair Comparisons ---" << endl;
-    vector<pair<int, int>> points = {{3, 5}, {1, 2}, {3, 1}, {1, 5}};
+    vector<pair<int, int>> comparisonPoints = {{3, 5}, {1, 2}, {3, 1}, {1, 5}};
     
     cout << "Original points: ";
-    for(const auto& pt : points) {
+    for(const auto& pt : comparisonPoints) {
         cout << "(" << pt.first << "," << pt.second << ") ";
     }
     cout << endl;
     
     // Sort by first, then by second
-    sort(points.begin(), points.end());
+    sort(comparisonPoints.begin(), comparisonPoints.end());
     cout << "Sorted points: ";
-    for(const auto& pt : points) {
+    for(const auto& pt : comparisonPoints) {
         cout << "(" << pt.first << "," << pt.second << ") ";
     }
     cout << endl;
     
     // Custom comparison - sort by sum of coordinates
-    sort(points.begin(), points.end(), 
+    sort(comparisonPoints.begin(), comparisonPoints.end(), 
          [](const pair<int,int>& a, const pair<int,int>& b) {
              return (a.first + a.second) < (b.first + b.second);
          });
     cout << "Sorted by sum: ";
-    for(const auto& pt : points) {
+    for(const auto& pt : comparisonPoints) {
         cout << "(" << pt.first << "," << pt.second << ") ";
     }
     cout << endl;
     
-    // 15. Properties
+    // 15. Pair as function return value
+    cout << "\n--- Pair as Return Value ---" << endl;
+    vector<int> rawScores = {64, 72, 91, 58, 88, 93};
+    auto [minScore, maxScore] = getMinMaxPair(rawScores);
+    cout << "Min score: " << minScore << ", Max score: " << maxScore << endl;
+
+    // 16. Structured bindings (C++17)
+    cout << "\n--- Structured Bindings (C++17) ---" << endl;
+    pair<string, double> stockQuote = {"MSFT", 412.80};
+    auto [ticker, price] = stockQuote;
+    cout << "Ticker: " << ticker << ", Price: $" << price << endl;
+
+    // 17. Pair with priority_queue
+    cout << "\n--- Pair with priority_queue ---" << endl;
+    priority_queue<pair<int, string>> taskQueue;
+    taskQueue.push({3, "Low priority cleanup"});
+    taskQueue.push({10, "Critical bug fix"});
+    taskQueue.push({6, "Feature implementation"});
+    while (!taskQueue.empty()) {
+        auto [priority, task] = taskQueue.top();
+        cout << "Priority " << priority << ": " << task << endl;
+        taskQueue.pop();
+    }
+    
+    // 18. Properties
     cout << "\n--- Pair Properties ---" << endl;
     cout << "1. Stores two heterogeneous objects" << endl;
     cout << "2. Comparison: first element has priority" << endl;
@@ -204,6 +245,8 @@ int main() {
     cout << "6. Can be swapped efficiently" << endl;
     cout << "7. Supports tie() for unpacking" << endl;
     cout << "8. Perfect for coordinate systems and key-value pairs" << endl;
+    cout << "9. Compatible with structured bindings" << endl;
+    cout << "10. Plays nicely with STL priority queues and algorithms" << endl;
     
     return 0;
 }

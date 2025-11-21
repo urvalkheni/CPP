@@ -1,16 +1,94 @@
 #include <iostream>
 #include <string>
-#include <algorithm>
-using namespace std;
-
-#include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
+#include <cctype>
 using namespace std;
 
 // Enhanced Palindrome Operations Using Recursion
 // Version 2.0 - Added longest palindrome, partitioning, and advanced features
+
+string toLowerCopy(const string& input) {
+    string result = input;
+    transform(result.begin(), result.end(), result.begin(), [](unsigned char ch) {
+        return static_cast<char>(tolower(ch));
+    });
+    return result;
+}
+
+bool isPalindromeIterative(const string& str) {
+    size_t left = 0;
+    size_t right = str.length();
+    if (right == 0) {
+        return true;
+    }
+    right--;
+    while (left < right) {
+        if (str[left] != str[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+void buildFrequencyRecursive(const string& str, size_t index, vector<int>& frequency) {
+    if (index == str.length()) {
+        return;
+    }
+    unsigned char ch = static_cast<unsigned char>(tolower(str[index]));
+    frequency[ch]++;
+    buildFrequencyRecursive(str, index + 1, frequency);
+}
+
+bool canFormPalindromePermutation(const string& str) {
+    vector<int> frequency(256, 0);
+    buildFrequencyRecursive(str, 0, frequency);
+    int oddCount = 0;
+    for (int value : frequency) {
+        if (value % 2 != 0) {
+            oddCount++;
+        }
+    }
+    return oddCount <= 1;
+}
+
+int longestPalindromeSubsequenceRec(const string& str, int left, int right, vector<vector<int>>& memo) {
+    if (left > right) {
+        return 0;
+    }
+    if (left == right) {
+        return 1;
+    }
+    int& cached = memo[left][right];
+    if (cached != -1) {
+        return cached;
+    }
+    if (str[left] == str[right]) {
+        cached = 2 + longestPalindromeSubsequenceRec(str, left + 1, right - 1, memo);
+        return cached;
+    }
+    cached = max(longestPalindromeSubsequenceRec(str, left + 1, right, memo),
+                 longestPalindromeSubsequenceRec(str, left, right - 1, memo));
+    return cached;
+}
+
+int longestPalindromeSubsequence(const string& str) {
+    if (str.empty()) {
+        return 0;
+    }
+    vector<vector<int>> memo(str.length(), vector<int>(str.length(), -1));
+    return longestPalindromeSubsequenceRec(str, 0, static_cast<int>(str.length()) - 1, memo);
+}
+
+string readLineWithPrompt(const string& prompt) {
+    cout << prompt;
+    cin >> ws;
+    string input;
+    getline(cin, input);
+    return input;
+}
 
 // Check if string is palindrome (recursion)
 bool isPalindromeString(string str, int start, int end) {
@@ -108,16 +186,6 @@ string findLongestPalindromeSubstring(string str, int left, int right, int& maxL
     return str.substr(startIdx, maxLen);
 }
 
-// NEW: Check if string can be rearranged to form palindrome
-bool canFormPalindrome(string str, int index, int oddCount) {
-    if (index == str.length()) {
-        return oddCount <= 1;
-    }
-    
-    // Count frequency recursively (simplified version)
-    return oddCount <= 1;
-}
-
 // NEW: Generate all palindromic partitions
 void generatePalindromePartitions(string str, int start, vector<string>& current, vector<vector<string>>& result) {
     if (start == str.length()) {
@@ -160,23 +228,19 @@ int main() {
     cout << "7. Find Longest Palindromic Substring (NEW)" << endl;
     cout << "8. Palindrome Partitioning (NEW)" << endl;
     cout << "9. Min Deletions for Palindrome (NEW)" << endl;
-    cout << "\nEnter choice (1-9): ";
+    cout << "10. Can Form Palindrome Permutation (NEW)" << endl;
+    cout << "11. Compare Recursive vs Iterative Check (NEW)" << endl;
+    cout << "12. Longest Palindromic Subsequence Length (NEW)" << endl;
+    cout << "\nEnter choice (1-12): ";
     cin >> choice;
     
     switch(choice) {
         case 1: {
-            string str;
-            cout << "Enter a string: ";
-            cin >> str;
-            
-            // Convert to lowercase for case-insensitive check
-            transform(str.begin(), str.end(), str.begin(), ::tolower);
-            
-            if (isPalindromeString(str, 0, str.length() - 1)) {
-                cout << "\"" << str << "\" is a palindrome!" << endl;
-            } else {
-                cout << "\"" << str << "\" is NOT a palindrome." << endl;
-            }
+            string input = readLineWithPrompt("Enter a string: ");
+            string normalized = toLowerCopy(input);
+            bool result = normalized.empty() ||
+                          isPalindromeString(normalized, 0, static_cast<int>(normalized.length()) - 1);
+            cout << '"' << input << '"' << (result ? " is a palindrome!" : " is NOT a palindrome.") << endl;
             break;
         }
         
@@ -316,6 +380,37 @@ int main() {
             break;
         }
         
+        case 10: {
+            cout << "\n--- Can Form Palindrome Permutation ---" << endl;
+            string candidate = readLineWithPrompt("Enter string: ");
+            bool possible = canFormPalindromePermutation(candidate);
+            cout << '"' << candidate << '"'
+                 << (possible ? " CAN " : " CANNOT ")
+                 << "be rearranged into a palindrome" << endl;
+            break;
+        }
+        
+        case 11: {
+            cout << "\n--- Recursive vs Iterative Check ---" << endl;
+            string sample = readLineWithPrompt("Enter string: ");
+            string normalized = toLowerCopy(sample);
+            bool recursiveResult = normalized.empty() ||
+                                   isPalindromeString(normalized, 0, static_cast<int>(normalized.length()) - 1);
+            bool iterativeResult = isPalindromeIterative(normalized);
+            cout << "Recursive says: " << (recursiveResult ? "Palindrome" : "Not palindrome") << endl;
+            cout << "Iterative says: " << (iterativeResult ? "Palindrome" : "Not palindrome") << endl;
+            cout << "Results match: " << (recursiveResult == iterativeResult ? "Yes" : "No") << endl;
+            break;
+        }
+        
+        case 12: {
+            cout << "\n--- Longest Palindromic Subsequence Length ---" << endl;
+            string source = readLineWithPrompt("Enter string: ");
+            int length = longestPalindromeSubsequence(source);
+            cout << "Longest palindromic subsequence length: " << length << endl;
+            break;
+        }
+        
         default:
             cout << "Invalid choice!" << endl;
             return 1;
@@ -327,7 +422,9 @@ int main() {
     cout << "✓ Time complexity: O(n) for basic check" << endl;
     cout << "✓ Space complexity: O(n) for recursion stack" << endl;
     cout << "✓ Advanced algorithms: longest substring, partitioning" << endl;
-    cout << "✓ Dynamic programming optimization possible" << endl;
+    cout << "✓ Supports iterative and recursive strategies" << endl;
+    cout << "✓ Dynamic programming for subsequence length" << endl;
+    cout << "✓ Checks for permutation-based palindromes" << endl;
     
     return 0;
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // Enhanced Hollow Pattern Collection
@@ -333,6 +334,61 @@ void printHollowZigzag(int rows, int cols) {
     }
 }
 
+// NEW Pattern 16: Hollow Spiral Frame
+void printHollowSpiral(int n) {
+    cout << "\n--- Hollow Spiral Frame ---" << endl;
+    if (n <= 0) {
+        cout << "Size must be positive" << endl;
+        return;
+    }
+    vector<vector<char>> grid(n, vector<char>(n, ' '));
+    int top = 0, bottom = n - 1;
+    int left = 0, right = n - 1;
+    while (top <= bottom && left <= right) {
+        for (int j = left; j <= right; ++j) grid[top][j] = '*';
+        for (int i = top; i <= bottom; ++i) grid[i][right] = '*';
+        if (top < bottom) {
+            for (int j = right; j >= left; --j) grid[bottom][j] = '*';
+        }
+        if (left < right) {
+            for (int i = bottom; i >= top; --i) grid[i][left] = '*';
+        }
+        top += 2;
+        left += 2;
+        right -= 2;
+        bottom -= 2;
+    }
+    for (const auto& row : grid) {
+        for (char ch : row) {
+            cout << ch << ' ';
+        }
+        cout << endl;
+    }
+}
+
+// NEW Pattern 17: Hollow Double Pyramid
+void printHollowDoublePyramid(int n) {
+    cout << "\n--- Hollow Double Pyramid ---" << endl;
+    if (n <= 0) {
+        cout << "Height must be positive" << endl;
+        return;
+    }
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= n - i; ++j) cout << ' ';
+        for (int j = 1; j <= 2 * i - 1; ++j) {
+            if (j == 1 || j == 2 * i - 1 || i == n) cout << '*';
+            else cout << ' ';
+        }
+        int gap = 2 * (n - i) + 1;
+        for (int j = 0; j < gap; ++j) cout << ' ';
+        for (int j = 1; j <= 2 * i - 1; ++j) {
+            if (j == 1 || j == 2 * i - 1 || i == n) cout << '*';
+            else cout << ' ';
+        }
+        cout << endl;
+    }
+}
+
 int main() {
     int choice, n, rows, cols;
     
@@ -353,8 +409,10 @@ int main() {
     cout << "13. Hollow Heart (NEW)" << endl;
     cout << "14. Hollow Hexagon (NEW)" << endl;
     cout << "15. Hollow Zigzag (NEW)" << endl;
-    cout << "16. Show All Patterns" << endl;
-    cout << "\nEnter choice (1-16): ";
+    cout << "16. Hollow Spiral Frame (NEW)" << endl;
+    cout << "17. Hollow Double Pyramid (NEW)" << endl;
+    cout << "18. Show All Patterns" << endl;
+    cout << "\nEnter choice (1-18): ";
     cin >> choice;
     
     switch(choice) {
@@ -449,6 +507,18 @@ int main() {
             break;
             
         case 16:
+            cout << "Enter size: ";
+            cin >> n;
+            printHollowSpiral(n);
+            break;
+
+        case 17:
+            cout << "Enter height: ";
+            cin >> n;
+            printHollowDoublePyramid(n);
+            break;
+            
+        case 18:
             cout << "\n--- Showing ALL Patterns (size=5) ---" << endl;
             printHollowSquare(6);
             printHollowRectangle(5, 8);
@@ -465,6 +535,8 @@ int main() {
             printHollowHeart(6);
             printHollowHexagon(4);
             printHollowZigzag(7, 10);
+            printHollowSpiral(7);
+            printHollowDoublePyramid(4);
             break;
             
         default:
@@ -477,7 +549,7 @@ int main() {
     cout << "✓ Creates empty space inside" << endl;
     cout << "✓ More visually interesting than solid patterns" << endl;
     cout << "✓ Useful for frames and borders" << endl;
-    cout << "✓ 15 unique patterns including diamond, butterfly, heart" << endl;
+    cout << "✓ 17 unique patterns including spiral and double pyramid" << endl;
     cout << "✓ Great for decorative ASCII art" << endl;
     
     return 0;
