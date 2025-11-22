@@ -1,0 +1,3 @@
+#include <iostream>
+using namespace std;
+int main(){ int n; if(!(cin>>n)||n<=0) return 0; int total=n*(n+1)/2; int val=1; int **a=new int*[n]; for(int i=0;i<n;++i) a[i]=new int[n]; for(int i=0;i<n;++i) for(int j=0;j<n;++j) a[i][j]=0; int top=0,left=0,bottom=n-1,right=n-1; while(val<=total){ for(int j=left;j<=right && val<=total;++j){ a[top][j]=val++; } top++; for(int i=top;i<=bottom && val<=total;++i){ a[i][right]=val++; } right--; for(int j=right;j>=left && val<=total;++j){ a[bottom][j]=val++; } bottom--; for(int i=bottom;i>=top && val<=total;++i){ a[i][left]=val++; } left++; } for(int i=0;i<n;++i){ for(int j=0;j<=i;++j){ cout<<a[i][j]<<' '; } cout<<'\n'; } for(int i=0;i<n;++i) delete[] a[i]; delete[] a; return 0; }
