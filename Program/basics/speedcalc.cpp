@@ -10,10 +10,16 @@ int main() {
     const double KM_PER_LIGHT_YEAR = SPEED_OF_LIGHT_KMPS * SECONDS_IN_YEAR;
 
     cout << "Enter distance between stars (in light-years): ";
-    cin >> distance_light_years;
+    if (!(cin >> distance_light_years) || distance_light_years <= 0) {
+        cout << "Invalid distance." << endl;
+        return 1;
+    }
 
     cout << "Enter speed of spacecraft (% of speed of light): ";
-    cin >> speed_percent;
+    if (!(cin >> speed_percent) || speed_percent <= 0 || speed_percent >= 100) {
+        cout << "Speed must be > 0 and < 100." << endl;
+        return 1;
+    }
 
     // Convert input to actual speed in km/s
     double speed_kmps = (speed_percent / 100.0) * SPEED_OF_LIGHT_KMPS;

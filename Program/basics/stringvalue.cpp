@@ -6,9 +6,14 @@ int main() {
     cout << "Enter a string: ";
     getline(cin, str);
 
+    if (str.empty()) {
+        cout << "Nothing to display; empty string provided." << endl;
+        return 0;
+    }
+
     cout << "ASCII Values of each character:\n";
-    for(int i = 0; i < str.length(); i++) {
-        cout << "Character: " << str[i] << " | ASCII Value: " << int(str[i]) << endl;
+    for(char ch : str) {
+        cout << "Character: " << ch << " | ASCII Value: " << static_cast<int>(ch) << endl;
     }
     return 0;
 }
