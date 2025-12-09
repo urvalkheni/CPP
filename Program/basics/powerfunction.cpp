@@ -1,19 +1,25 @@
 #include <iostream>
 using namespace std;
 
-// Function to calculate power
+// Function to calculate power using fast exponentiation
 double power(double base, int exponent) {
-    double result = 1.0;
+    if (exponent == 0) return 1.0;
 
-    if (exponent > 0) {
-        for (int i = 0; i < exponent; ++i)
-            result *= base;
-    } else if (exponent < 0) {
-        for (int i = 0; i < -exponent; ++i)
-            result /= base;
+    if (base == 0.0 && exponent < 0) {
+        throw invalid_argument("0 cannot be raised to a negative exponent");
     }
-    // If exponent is 0, result remains 1.0
-    return result;
+
+    double result = 1.0;
+    int exp = abs(exponent);
+    double current = base;
+
+    while (exp > 0) {
+        if (exp & 1) result *= current;
+        current *= current;
+        exp >>= 1;
+    }
+
+    return exponent > 0 ? result : 1.0 / result;
 }
 
 int main() {
@@ -21,15 +27,26 @@ int main() {
     int exponent;
 
     cout << "Enter the base: ";
-    cin >> base;
+    if (!(cin >> base)) {
+        cout << "Invalid base." << endl;
+        return 1;
+    }
 
     cout << "Enter the exponent (can be negative): ";
-    cin >> exponent;
+    if (!(cin >> exponent)) {
+        cout << "Invalid exponent." << endl;
+        return 1;
+    }
 
-    double result = power(base, exponent);
-    cout << fixed;
-    cout.precision(5);
-    cout << base << " ^ " << exponent << " = " << result << endl;
+    try {
+        double result = power(base, exponent);
+        cout << fixed;
+        cout.precision(5);
+        cout << base << " ^ " << exponent << " = " << result << endl;
+    } catch (const exception &ex) {
+        cout << "Error: " << ex.what() << endl;
+        return 1;
+    }
 
     return 0;
 }
