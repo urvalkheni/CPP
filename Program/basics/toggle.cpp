@@ -10,10 +10,21 @@ int main() {
     int num, position;
 
     cout << "Enter a number: ";
-    cin >> num;
+    if (!(cin >> num)) {
+        cout << "Invalid number input." << endl;
+        return 1;
+    }
 
     cout << "Enter the bit position to toggle (starting from 0): ";
-    cin >> position;
+    if (!(cin >> position)) {
+        cout << "Invalid position input." << endl;
+        return 1;
+    }
+
+    if (position < 0 || position >= 31) {
+        cout << "Bit position must be between 0 and 30." << endl;
+        return 1;
+    }
 
     // Show the number before toggling
     cout << "Number before toggling: " << num << " (Binary: ";

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void printTribonacci(int n) {
-    int t0 = 0, t1 = 1, t2 = 1, nextTerm;
+    long long t0 = 0, t1 = 1, t2 = 1, nextTerm;
     
     if (n >= 1) printf("%d ", t0);
     if (n >= 2) printf("%d ", t1);
@@ -20,7 +20,10 @@ void printTribonacci(int n) {
 int main() {
     int n;
     printf("Enter the number of terms: ");
-    scanf("%d", &n);
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        printf("Invalid input. Please enter a positive integer.\n");
+        return 1;
+    }
     
     printf("Tribonacci Series: ");
     printTribonacci(n);
