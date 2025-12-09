@@ -6,7 +6,15 @@ int main() {
 
     // Input the three sides
     cout << "Enter three sides of the triangle: ";
-    cin >> a >> b >> c;
+    if (!(cin >> a >> b >> c)) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+        cout << "Sides must be positive." << endl;
+        return 1;
+    }
 
     // Triangle Inequality Theorem check
     if ((a + b > c) && (a + c > b) && (b + c > a)) {
