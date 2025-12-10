@@ -15,10 +15,18 @@ int divisibleSumPairs(int n, int k, const std::vector<int>& ar) {
 
 int main() {
     int n, k;
-    std::cin >> n >> k;
+    std::cout << "Enter number of elements and divisor: ";
+    if (!(std::cin >> n >> k) || n <= 0 || k <= 0) {
+        std::cout << "Invalid input. n and k must be positive." << std::endl;
+        return 1;
+    }
     std::vector<int> ar(n);
+    std::cout << "Enter " << n << " elements:\n";
     for (int i = 0; i < n; ++i) {
-        std::cin >> ar[i];
+        if (!(std::cin >> ar[i])) {
+            std::cout << "Invalid element at position " << i << std::endl;
+            return 1;
+        }
     }
 
     int result = divisibleSumPairs(n, k, ar);

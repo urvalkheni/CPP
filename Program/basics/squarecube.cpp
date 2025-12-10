@@ -27,6 +27,11 @@ bool isPerfectCube(int num) {
 
 
 void checkNumbers(int N) {
+    if (N <= 0) {
+        cout << "Range must be positive." << endl;
+        return;
+    }
+
     cout << "Perfect Squares satisfying the condition:\n";
     bool foundSquare = false;
     for (int i = 1; i <= N; i++) {
@@ -62,7 +67,10 @@ void checkNumbers(int N) {
 int main() {
     int N;
     cout << "Enter the range (N): ";
-    cin >> N;
+    if (!(cin >> N)) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
 
     checkNumbers(N);
 
