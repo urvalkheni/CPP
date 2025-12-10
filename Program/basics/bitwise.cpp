@@ -12,7 +12,14 @@ int main() {
 
     // Taking input
     cout << "Enter two numbers: ";
-    cin >> a >> b;
+    if (!(cin >> a >> b)) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
+
+    if (a < 0 || b < 0) {
+        cout << "Bitwise operations work best with non-negative numbers." << endl;
+    }
 
     // Bitwise AND
     int andResult = a & b;
