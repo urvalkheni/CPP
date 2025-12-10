@@ -24,10 +24,16 @@ void decimalToHexadecimal(int num) {
 int main() {
     int decimalNumber;
     cout << "Enter a decimal number: ";
-    cin >> decimalNumber;
+    if (!(cin >> decimalNumber)) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
 
     if (decimalNumber < 0) {
-        cout << "Please enter a positive number!" << endl;
+        cout << "Error: Please enter a positive number!" << endl;
+        return 1;
+    } else if (decimalNumber == 0) {
+        cout << "Hexadecimal: 0" << endl;
     } else {
         decimalToHexadecimal(decimalNumber);
     }
