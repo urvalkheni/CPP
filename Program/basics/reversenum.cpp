@@ -14,10 +14,17 @@ int reverseNumber(int num) {
 int main() {
     int num;
     cout << "Enter a number: ";
-    cin >> num;
+    if (!(cin >> num)) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
     
-    int reversedNum = reverseNumber(num);
-    cout << "Reversed number: " << reversedNum << endl;
+    if (num < 0) {
+        cout << "Note: Reversing a negative number reverses only digits." << endl;
+    }
+    
+    int reversedNum = reverseNumber(abs(num));
+    cout << "Reversed number: " << (num < 0 ? -reversedNum : reversedNum) << endl;
     
     return 0;
 }
