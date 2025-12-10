@@ -8,7 +8,10 @@ int main() {
     int n;
 
     cout << "Enter number of students: ";
-    cin >> n;
+    if (!(cin >> n) || n <= 0) {
+        cout << "Invalid input. Number of students must be positive." << endl;
+        return 1;
+    }
 
     // Vector to store marks
     vector<float> marks(n);
@@ -17,7 +20,10 @@ int main() {
     // Input marks
     for (int i = 0; i < n; ++i) {
         cout << "Enter marks of student " << i + 1 << ": ";
-        cin >> marks[i];
+        if (!(cin >> marks[i]) || marks[i] < 0 || marks[i] > 100) {
+            cout << "Invalid marks. Please enter a value between 0-100." << endl;
+            return 1;
+        }
         sum += marks[i];
     }
 

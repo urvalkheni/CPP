@@ -21,7 +21,13 @@ void miniMaxSum(const std::vector<int>& arr) {
 
 int main() {
     std::string input;
+    std::cout << "Enter 5 space-separated numbers: ";
     std::getline(std::cin, input);
+
+    if (input.empty()) {
+        std::cout << "Error: No input provided." << std::endl;
+        return 1;
+    }
 
     std::istringstream stream(input);
     std::vector<int> arr;
@@ -29,6 +35,11 @@ int main() {
 
     while (stream >> number) {
         arr.push_back(number);
+    }
+
+    if (arr.size() != 5) {
+        std::cout << "Error: Exactly 5 numbers required." << std::endl;
+        return 1;
     }
 
     miniMaxSum(arr);
