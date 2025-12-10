@@ -22,10 +22,16 @@ void decimalToOctal(int decimal) {
 int main() {
     int decimal;
     cout << "Enter a decimal number: ";
-    cin >> decimal;
+    if (!(cin >> decimal)) {
+        cout << "Invalid input." << endl;
+        return 1;
+    }
 
     if (decimal < 0) {
-        cout << "Please enter a non-negative number." << endl;
+        cout << "Error: Please enter a non-negative number." << endl;
+        return 1;
+    } else if (decimal == 0) {
+        cout << "Octal: 0" << endl;
     } else {
         decimalToOctal(decimal);
     }
