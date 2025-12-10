@@ -24,7 +24,15 @@ void decimalToBinary(int num) {
 int main() {
     int num;
     std::cout << "Enter a decimal number: ";
-    std::cin >> num;
+    if (!(std::cin >> num)) {
+        std::cout << "Invalid input." << std::endl;
+        return 1;
+    }
+
+    if (num < 0) {
+        std::cout << "Note: Using absolute value for conversion." << std::endl;
+        num = abs(num);
+    }
 
     decimalToBinary(num);
 
