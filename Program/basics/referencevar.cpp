@@ -5,9 +5,15 @@ int main(){
     int a,b,c;
     cout<<"Built-in Data Types"<<endl;
     cout<<"Enter The Value of a :: ";
-    cin>>a;
+    if (!(cin>>a)) {
+        cout<<"Invalid input for a."<<endl;
+        return 1;
+    }
     cout<<"Enter The Value of b :: ";
-    cin>>b;
+    if (!(cin>>b)) {
+        cout<<"Invalid input for b."<<endl;
+        return 1;
+    }
     c  = a + b;
     cout<<"The Sum is :: "<<c<<endl;
     cout<<"The Gloabl C is :: "<<::c<<endl<<endl;
