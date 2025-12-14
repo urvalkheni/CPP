@@ -41,8 +41,9 @@ void printFiboSeries(int n) {
 }
 
 // Check if a number is in Fibonacci sequence
-bool isFibonacci(int num) {
-    int a = 1, b = 1, c = 1;
+bool isFibonacci(long long num) {
+    if(num <= 0) return false;
+    long long a = 1, b = 1, c = 1;
     if(num == 1) return true;
     while(c < num) {
         c = a + b;
