@@ -46,7 +46,11 @@ int main(){
     cout << "4. Calculate Double Factorial (n!!)" << endl;
     cout << "5. Factorial Table" << endl;
     cout << "\nEnter choice: ";
-    cin >> choice;
+    
+    if(!(cin >> choice) || choice < 1 || choice > 5) {
+        cout << "Invalid choice!" << endl;
+        return 1;
+    }
     
     switch(choice) {
         case 1:
